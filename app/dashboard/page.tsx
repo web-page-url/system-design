@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { CheckCircle2, TrendingUp, Cpu, Award } from "lucide-react";
 
 export default function DashboardPage() {
@@ -80,14 +81,14 @@ export default function DashboardPage() {
                                 <div
                                     key={user.rank}
                                     className={`flex items-center justify-between p-4 rounded-2xl mb-1 transition-all ${user.isUser
-                                            ? "bg-gradient-to-r from-rose-500/20 to-orange-500/10 border border-rose-500/30"
-                                            : "hover:bg-white/5 border border-transparent"
+                                        ? "bg-gradient-to-r from-rose-500/20 to-orange-500/10 border border-rose-500/30"
+                                        : "hover:bg-white/5 border border-transparent"
                                         }`}
                                 >
                                     <div className="flex items-center gap-4">
                                         <span className={`text-lg font-black w-8 text-center ${i === 0 ? "text-amber-400 drop-shadow-[0_0_10px_rgba(251,191,36,0.5)]" :
-                                                i === 1 ? "text-zinc-300" :
-                                                    i === 2 ? "text-amber-700" : "text-zinc-600"
+                                            i === 1 ? "text-zinc-300" :
+                                                i === 2 ? "text-amber-700" : "text-zinc-600"
                                             }`}>
                                             #{user.rank}
                                         </span>
