@@ -1,0 +1,722 @@
+You want to **replicate a platform like** **Codemia.io** using **Next.js 16**.
+I'll give you:
+
+1. Clear **product breakdown (what Codemia actually is)**
+2. **Full architecture**
+3. **Systematic development plan**
+4. **Database design**
+5. **Feature modules**
+6. **AI evaluation system**
+7. **Detailed prompt you can give to an AI builder (like Antigravity / Cursor / Lovable)**
+
+This will help you build a **production-grade clone**, not just a simple UI.
+
+---
+
+# 1. What Codemia Actually Is (Product Breakdown)
+
+Codemia is essentially **LeetCode for System Design**.
+
+Instead of coding problems, it gives **system design challenges** like:
+
+* Design URL Shortener
+* Design Uber
+* Design Dropbox
+* Design Ticket Booking System
+
+Users must:
+
+1. Understand requirements
+2. Estimate scale
+3. Design architecture
+4. Create diagrams
+5. Submit solution
+6. Get AI feedback
+
+The platform includes:
+
+* 120+ system design problems
+* AI feedback system
+* structured problem solving
+* architecture diagrams
+* editorial solutions
+* progress tracking
+
+The key idea is **interactive practice + AI evaluation**. ([javarevisited.wordpress.com][1])
+
+---
+
+# 2. Core Features You Must Replicate
+
+### 1️⃣ Problem Library
+
+Like LeetCode but for system design.
+
+Each problem contains:
+
+```
+Title
+Difficulty
+Tags
+Companies
+Description
+Constraints
+Hints
+Editorial solution
+```
+
+Example:
+
+```
+Design URL Shortener
+Difficulty: Medium
+Tags: Distributed System, Database
+Companies: Google, Amazon
+```
+
+---
+
+### 2️⃣ Interactive Design Workspace
+
+User writes solution in structured sections:
+
+```
+1 Functional Requirements
+2 Non Functional Requirements
+3 Capacity Estimation
+4 API Design
+5 Database Schema
+6 High Level Design
+7 Detailed Design
+8 Tradeoffs
+9 Improvements
+```
+
+---
+
+### 3️⃣ Architecture Diagram Tool
+
+User can draw:
+
+* microservices
+* load balancer
+* queues
+* databases
+* APIs
+
+Like:
+
+```
+Excalidraw
+tldraw
+draw.io
+```
+
+---
+
+### 4️⃣ AI Evaluation System
+
+User submits answer → AI evaluates.
+
+Example scoring:
+
+```
+Requirements clarity → 8/10
+Architecture correctness → 7/10
+Scalability → 9/10
+Tradeoffs → 6/10
+```
+
+AI then suggests improvements.
+
+---
+
+### 5️⃣ Expert Editorial Solutions
+
+After submission user can see:
+
+* expert architecture
+* diagrams
+* explanation
+
+---
+
+### 6️⃣ Progress Tracking
+
+User dashboard:
+
+```
+Problems solved
+Accuracy
+AI scores
+History
+```
+
+---
+
+### 7️⃣ Mock System Design Interview
+
+AI interviewer asks questions like:
+
+```
+Let's design Dropbox.
+
+What are the requirements?
+How will you scale storage?
+What about replication?
+```
+
+---
+
+# 3. Tech Stack (Recommended)
+
+For **Next.js 16 SaaS architecture**
+
+Frontend
+
+```
+Next.js 16 (App Router)
+React Server Components
+Tailwind
+Shadcn UI
+Framer Motion
+```
+
+Editor
+
+```
+TipTap / Lexical editor
+```
+
+Diagram Tool
+
+```
+tldraw
+or
+Excalidraw
+```
+
+Backend
+
+```
+Next.js Server Actions
+Node.js
+```
+
+Database
+
+```
+PostgreSQL
+```
+
+ORM
+
+```
+Prisma
+```
+
+Auth
+
+```
+Clerk
+or
+NextAuth
+```
+
+AI
+
+```
+OpenAI / Gemini
+LangGraph
+```
+
+Search
+
+```
+Postgres Full text
+or
+Meilisearch
+```
+
+Caching
+
+```
+Redis
+```
+
+Hosting
+
+```
+Vercel
+Supabase
+```
+
+---
+
+# 4. Database Design
+
+### USERS
+
+```
+User
+id
+name
+email
+avatar
+createdAt
+```
+
+---
+
+### PROBLEMS
+
+```
+Problem
+id
+title
+slug
+difficulty
+description
+tags
+companies
+createdAt
+```
+
+---
+
+### SOLUTIONS
+
+User submissions.
+
+```
+Solution
+id
+userId
+problemId
+requirements
+capacity
+apiDesign
+database
+architecture
+tradeoffs
+score
+feedback
+createdAt
+```
+
+---
+
+### DIAGRAMS
+
+```
+Diagram
+id
+solutionId
+data (JSON)
+```
+
+---
+
+### EDITORIAL SOLUTIONS
+
+```
+Editorial
+problemId
+content
+diagram
+```
+
+---
+
+# 5. Application Pages
+
+### Landing Page
+
+```
+Hero
+Problem count
+Benefits
+Pricing
+Testimonials
+```
+
+---
+
+### Problems Page
+
+```
+/problems
+
+Filter
+Search
+Difficulty
+Companies
+Tags
+```
+
+---
+
+### Problem Detail
+
+```
+/problem/[slug]
+
+Description
+Start solving button
+Hints
+Discussion
+```
+
+---
+
+### Solve Page
+
+```
+/solve/[problemId]
+```
+
+Split screen UI
+
+```
+Left → Problem statement
+Right → Solution editor
+Bottom → Diagram
+```
+
+---
+
+### Submission Result
+
+Shows
+
+```
+AI score
+Feedback
+Comparison with expert solution
+```
+
+---
+
+### Dashboard
+
+```
+Problems solved
+Score history
+Leaderboard
+```
+
+---
+
+# 6. AI Evaluation System (Important)
+
+When user submits solution:
+
+### Step 1
+
+Collect all sections.
+
+```
+requirements
+capacity
+api
+database
+architecture
+tradeoffs
+```
+
+---
+
+### Step 2
+
+Send to AI.
+
+Prompt:
+
+```
+Evaluate this system design answer.
+
+Problem:
+Design URL Shortener
+
+User answer:
+[answer]
+
+Score these:
+
+1 Requirements clarity
+2 Scalability
+3 Architecture correctness
+4 Data model
+5 Tradeoffs
+
+Return JSON:
+score + feedback
+```
+
+---
+
+### Step 3
+
+Store feedback.
+
+---
+
+# 7. Architecture
+
+```
+Client (Next.js)
+        |
+API Routes / Server Actions
+        |
+Service Layer
+        |
+Database (Postgres)
+        |
+AI Evaluation Service
+```
+
+Optional:
+
+```
+Queue (BullMQ)
+```
+
+For async evaluation.
+
+---
+
+# 8. Folder Structure (Next.js 16)
+
+```
+app
+ ├ landing
+ ├ dashboard
+ ├ problems
+ │   └ [slug]
+ ├ solve
+ │   └ [id]
+ ├ api
+ │   ├ evaluate
+ │   ├ problems
+ │   ├ submission
+ └ auth
+```
+
+Components
+
+```
+components
+  ProblemCard
+  SolutionEditor
+  DiagramBoard
+  ScoreCard
+```
+
+---
+
+# 9. Diagram Editor Integration
+
+Use
+
+```
+tldraw
+```
+
+or
+
+```
+excalidraw
+```
+
+Save diagram JSON in DB.
+
+---
+
+# 10. Monetization (Optional)
+
+Free
+
+```
+20 problems
+```
+
+Premium
+
+```
+Full library
+AI feedback
+mock interviews
+```
+
+---
+
+# 11. Detailed Prompt to Build This App
+
+You can give this to **AI builder tools**.
+
+---
+
+### MASTER BUILD PROMPT
+
+```
+Build a production-grade web application similar to Codemia.io using Next.js 16.
+
+The platform is an interactive system design practice platform where users solve real-world architecture problems and receive AI feedback.
+
+Core Features
+
+1 Problem Library
+A list of system design problems similar to LeetCode.
+
+Each problem contains:
+- title
+- description
+- difficulty
+- tags
+- companies
+- hints
+- editorial solution
+
+Users can filter problems by difficulty, tags, and company.
+
+2 Interactive Solution Workspace
+
+Users solve problems using structured sections:
+
+Functional Requirements
+Non Functional Requirements
+Capacity Estimation
+API Design
+Database Design
+High Level Architecture
+Detailed Design
+Tradeoffs
+Future Improvements
+
+3 Diagram Builder
+
+Users should be able to draw architecture diagrams inside the workspace using a tool like tldraw or Excalidraw.
+
+Diagrams must be saved as JSON in the database.
+
+4 AI Evaluation
+
+When the user submits a solution:
+
+Send the full answer to an AI evaluation service.
+
+AI should evaluate:
+
+Requirements
+Scalability
+Architecture
+Data modeling
+Tradeoffs
+
+Return a structured JSON score with feedback.
+
+Store results in database.
+
+5 Dashboard
+
+User dashboard must show:
+
+Problems solved
+Average score
+Recent submissions
+Leaderboard
+
+6 Editorial Solutions
+
+Each problem should have expert solution after submission.
+
+7 Authentication
+
+Implement authentication using Clerk or NextAuth.
+
+8 Database
+
+Use PostgreSQL with Prisma ORM.
+
+Tables:
+
+Users
+Problems
+Solutions
+Diagrams
+EditorialSolutions
+
+9 UI Design
+
+Use:
+
+Next.js 16
+React Server Components
+TailwindCSS
+Shadcn UI
+Framer Motion animations
+
+Design should be modern and minimal similar to developer tools like:
+
+Linear
+Vercel
+Stripe docs
+
+10 Architecture
+
+Use Next.js server actions for backend logic.
+
+Integrate Redis caching.
+
+AI evaluation should be handled asynchronously using a queue system.
+
+11 Deployment
+
+Deploy frontend on Vercel
+Database on Supabase
+Redis on Upstash
+
+Ensure the application is mobile responsive, scalable, and production-ready.
+```
+
+---
+
+# 12. Advanced Features (If You Want)
+
+You can add:
+
+### AI Mock Interview
+
+AI interviewer:
+
+```
+Let's design Uber.
+
+What are requirements?
+```
+
+---
+
+### Architecture Simulator
+
+Simulate:
+
+```
+traffic
+load
+failures
+```
+
+---
+
+### Community Discussion
+
+Users discuss designs.
+
+---
+
+### Leaderboard
+
+Top system designers.
+
+---
